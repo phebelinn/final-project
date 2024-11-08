@@ -2,7 +2,11 @@ import pygame
 
 #define walking
 
-#set up display window with map
+#load background images
+
+class Player():
+    def __init__(self, x, y):
+         img = pygame.image.load()
 
 def main():
     pygame.init()
