@@ -6,7 +6,7 @@ pygame.init()
 
 #set framerate
 clock = pygame.time.Clock()
-fps = 24
+fps = 30
 screen_width = 800
 screen_height = 600
 resolution = (screen_width, screen_height)
@@ -51,6 +51,7 @@ def main():
 
     running = True
     while running:
+        clock.tick(fps)
         player.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
