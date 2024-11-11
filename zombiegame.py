@@ -73,7 +73,7 @@ class Player():
 
 def main():
     pygame.display.set_caption("Zombie Grrrlz")
-    player = Player(100, screen_height - 300)
+    player = Player(100, screen_height - 250)
 
     running = True
     while running:
