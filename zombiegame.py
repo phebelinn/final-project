@@ -1,6 +1,5 @@
 import pygame
 pygame.init()
-#define walking
 
 #load background images
 
@@ -13,11 +12,20 @@ resolution = (screen_width, screen_height)
 screen = pygame.display.set_mode(resolution)
 
 class Player():
-    def __init__(self, x, y, z):
+    def __init__(self, x, y):
+         #store images for animations
          self.images_right = []
          self.images_left = []
          self.images_up = []
-         self.images_down = []
+         self.images_forward = []
+         self.index = 0
+         self.counter = 0
+         #run through images for animation 
+         for num in range(1, 4):
+             img_forward = pygame.image.load(f'img/zombforward{num}.png')
+             img_forward = pygame.transform.scale(img_forward, (40, 60))
+             self.images_forward.append(img_forward)
+         self.image = self.images_forward[self.index]    
          img = pygame.image.load('img/player_front.png')
          self.image = pygame.transform.scale((40, 60))
          self.rect = self.image.get_rect()
@@ -25,6 +33,7 @@ class Player():
          self.rect.y = y 
 
     def update(self):
+        walk_cooldown = 10
         #get key input
         key = pygame.key.get_pressed()
         if key[pygame.K_a]:
@@ -33,8 +42,10 @@ class Player():
             self.rect.x += 5
         if key[pygame.K_w]:
             self.rect.y -= 5
+            self.counter += 1
         if key[pygame.K_s]:
             self.rect.y += 5
+            self.counter += 1
         #adjust bounds
         if self.rect.bottom > screen_height:
             self.rect.bottom = screen_height 
@@ -44,6 +55,13 @@ class Player():
             self.rect.right = screen_width
         if self.rect.left < 0:
             self.rect.left = 0
+        #animation
+        if self.counter > walk_cooldown:
+            self.counter = 0
+            self.index += 1
+            if self.index >= len(self.images_forward):
+                self.index = 0
+            self.image = self.images_forward[self.index]
         
         #draw player
         screen.blit(self.image, self.rect)
