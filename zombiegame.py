@@ -14,6 +14,10 @@ screen = pygame.display.set_mode(resolution)
 
 class Player():
     def __init__(self, x, y, z):
+         self.images_right = []
+         self.images_left = []
+         self.images_up = []
+         self.images_down = []
          img = pygame.image.load('img/player_front.png')
          self.image = pygame.transform.scale((40, 60))
          self.rect = self.image.get_rect()
