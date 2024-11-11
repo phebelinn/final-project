@@ -16,15 +16,19 @@ class Player():
          #store images for animations
          self.images_right = []
          self.images_left = []
-         self.images_up = []
+         self.images_backward = []
          self.images_forward = []
          self.index = 0
          self.counter = 0
          #run through images for animation 
-         for num in range(1, 4):
+         for num in range(0, 3):
              img_forward = pygame.image.load(f'img/zombforward{num}.png')
              img_forward = pygame.transform.scale(img_forward, (40, 60))
              self.images_forward.append(img_forward)
+         for num in range(1, 5):
+             img_backward = pygame.image.load(f'img/zombbackward{num}.png')
+             img_backward = pygame.transform.scale(img_backward, (40, 60))
+             self.images_backward.append(img_backward)
          self.image = self.images_forward[self.index]    
          img = pygame.image.load('img/player_front.png')
          self.image = pygame.transform.scale((40, 60))
