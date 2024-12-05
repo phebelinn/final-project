@@ -50,6 +50,9 @@ class Player():
         if key[pygame.K_s]:
             self.rect.y += 5
             self.counter += 1
+        if key[pygame.K_a] == False and key[pygame.K_d] == False and key[pygame.K_w] == False and key[pygame.K_s] == False:
+            self.counter = 0 
+            self.index = 0
         #adjust bounds
         if self.rect.bottom > screen_height:
             self.rect.bottom = screen_height 
@@ -70,10 +73,14 @@ class Player():
         #draw player
         screen.blit(self.image, self.rect)
 
+def display_game(screen, player, background_img):
+    #displays background map and player
+    pygame.display.set_caption("Zombie Grrrlz")
+    background = pygame.image.load()
+    player = Player(100, screen_height - 250)
+    
 
 def main():
-    pygame.display.set_caption("Zombie Grrrlz")
-    player = Player(100, screen_height - 250)
 
     running = True
     while running:
@@ -82,7 +89,10 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-    pygame.quit()
+    display_game(screen, Player)
+    pygame.display.flip()
+
+pygame.quit()
 
 if __name__ == "__main__":
     main()
