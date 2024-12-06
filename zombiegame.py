@@ -30,7 +30,7 @@ class Player():
              img_backward = pygame.transform.scale(img_backward, (40, 60))
              self.images_backward.append(img_backward)
          self.image = self.images_forward[self.index]    
-         img = pygame.image.load('img/player_front.png')
+         img = pygame.image.load('img/zombforward1.png')
          self.image = pygame.transform.scale((40, 60))
          self.rect = self.image.get_rect()
          self.rect.x = x
@@ -73,26 +73,29 @@ class Player():
         #draw player
         screen.blit(self.image, self.rect)
 
-def display_game(screen, player, background_img):
+def display_game(screen, player, map_number):
     #displays background map and player
     pygame.display.set_caption("Zombie Grrrlz")
-    background = pygame.image.load()
-    player = Player(100, screen_height - 250)
-    
+    map = pygame.image.load(f'img/map{map_number}.png') 
+           
 
 def main():
 
     running = True
     while running:
         clock.tick(fps)
-        player.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-    display_game(screen, Player)
-    pygame.display.flip()
+        map_number = 1
+        display_game(screen, Player, map_number)
+        player = Player(100, screen_height - 250)
+        pygame.display.flip()
+        player.update()
 
-pygame.quit()
+        if player.rect.x > 760 and player.rect.y > 200 and player.rect.y < 400:
+            map_number += 1 
+    pygame.quit()
 
 if __name__ == "__main__":
     main()
