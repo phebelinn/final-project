@@ -72,10 +72,12 @@ class Player():
         #draw player
         screen.blit(self.image, self.rect)
 
-def display_game(screen, player, map_number):
+def display_background(screen, map_number):
     #displays background map and player
     pygame.display.set_caption("Zombie Grrrlz")
     map = pygame.image.load(f'img/map{map_number}.png') 
+    formatted_map = pygame.transform.scale(map, (screen_width, screen_height))
+    screen.blit(formatted_map, (0,0))
            
 
 def main():
@@ -87,7 +89,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         map_number = 1
-        display_game(screen, Player, map_number)
+        display_background(screen, map_number)
         pygame.display.flip()
         player.update()
 
