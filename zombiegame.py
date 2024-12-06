@@ -85,22 +85,26 @@ class Dialogue():
         self.dialogues = []
         self.index = 0
         self.counter = 1
-        num = self.counter
         for self.counter in range(1, 12):
-            dialogue_img = pygame.image.load(f'img/dialogue{num}.png')
-            dialogue_img = pygame.transform.scale(dialogue_img, (650, 300))
+            dialogue_img = pygame.image.load(f'img/dialogue{self.counter}.png')
+            dialogue_img = pygame.transform.scale(dialogue_img, (650, 400))
             self.dialogues.append(dialogue_img)
         self.image = self.dialogues[self.index]
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y 
+        self.key_pressed = False
     
     def update(self):
         key = pygame.key.get_pressed()
-        if key[pygame.K_SPACE]: 
-            if self.index >= len(self.dialogues):
-                self.index += 1
-                self.image = self.dialogues[self.index]
+        if key[pygame.K_SPACE] and not self.key_pressed: 
+                if self.index < len(self.dialogues) - 1:
+                    self.index += 1
+                    self.image = self.dialogues[self.index]
+                self.key_pressed = True
+        if not key[pygame.K_SPACE]:
+            self.key_pressed = False
+
         screen.blit(self.image, self.rect)
 
 
