@@ -78,7 +78,10 @@ def display_background(screen, map_number):
     pygame.display.set_caption("Zombie Grrrl")
     map = pygame.image.load(f'img/map{map_number}.png') 
     formatted_map = pygame.transform.scale(map, (screen_width, screen_height))
+    skelly = pygame.image.load(f'img/skelly.png')
+    formatted_skelly = pygame.transform.scale(skelly, (120, 150))
     screen.blit(formatted_map, (0,0))
+    screen.blit(formatted_skelly, (150, 90))
 
 class Dialogue():
     def __init__(self, x, y):
