@@ -35,7 +35,7 @@ class Player():
          self.rect.y = y 
 
     def update(self):
-        walk_cooldown = 3
+        walk_cooldown = 5
         #get key input
         key = pygame.key.get_pressed()
         if key[pygame.K_a]:
@@ -84,10 +84,29 @@ class Dialogue():
     def __init__(self, x, y):
         self.dialogues = []
         self.index = 0
-        self.counter = 0
+        self.counter = 1
+        num = self.counter
+        for self.counter in range(1, 12):
+            dialogue_img = pygame.image.load(f'img/dialogue{num}.png')
+            dialogue_img = pygame.transform.scale(dialogue_img, (650, 300))
+            self.dialogues.append(dialogue_img)
+        self.image = self.dialogues[self.index]
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y 
+    
+    def update(self):
+        key = pygame.key.get_pressed()
+        if key[pygame.K_SPACE]: 
+            if self.index >= len(self.dialogues):
+                self.index += 1
+                self.image = self.dialogues[self.index]
+        screen.blit(self.image, self.rect)
+
 
 def main():
     map_number = 1
+    dialogue = Dialogue(80, 250)
     player = Player(320, 200)
     running = True
     while running:
@@ -97,6 +116,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False 
         player.update()
+        dialogue.update()
         pygame.display.flip()
         if player.rect.x > 760 and player.rect.y > 200 and player.rect.y < 400:
             map_number += 1 
